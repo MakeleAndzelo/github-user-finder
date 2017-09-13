@@ -2,7 +2,7 @@
   <div id="app">
     <div class="field has-addons">
       <div class="control">
-        <input class="input" type="text" placeholder="Find a github user" v-model="nickname">
+        <input class="input" type="text" placeholder="Find a github user" @keyup.enter="openModal" v-model="nickname">
       </div>
       <div class="control">
         <a class="button is-info" @click="openModal">

@@ -6,7 +6,13 @@
           <p class="modal-card-title">Information about the user</p>
           <button class="delete" aria-label="close" @click="$emit('closeModal')"></button>
         </header>
-        <section class="modal-card-body">
+        <section class="modal-card-body" v-if="!user">
+          <div class="loader" v-if="activeLoader"></div>
+          <div v-if="!activeLoader">
+            <p>There are no user with this nickname</p>
+          </div>
+        </section>
+        <section class="modal-card-body" v-else>
           <div class="loader" v-if="activeLoader"></div>
           <div v-if="!activeLoader">
             <figure class="user-image image is-128x128">
@@ -39,7 +45,7 @@
               this.user = response.data;
             })
             .catch(error => {
-              this.$emit('closeModal');
+              this.user = false;
             })
         },
         mounted() {
@@ -70,7 +76,6 @@
   }
 
   .user-image {
-    background: red;
     margin: 20px auto;
   }
 </style>
